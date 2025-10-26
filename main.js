@@ -338,26 +338,44 @@ function renderDetailsHTML(t) {
       ? arr.map(a => `<span class="badge">${escapeHTML(String(a))}</span>`).join('')
       : '<span class="badge">None</span>';
 
+  const boolBadge = (label, state) => `
+    <div class="bool-item ${state ? 'true' : 'false'}">
+      <span class="icon">${state ? '✓' : '✕'}</span>
+      <span>${label}</span>
+    </div>
+  `;
+
   return `
     ${kv('Name', escapeHTML(t.Name ?? ''))}
+
+    <div class="kv">
+      <div class="k">Alternative Names</div>
+      <div class="badges">${list(t.AlternativeNames ?? [])}</div>
+    </div>
+
     ${kv('Coordinates', `X: <strong>${t.X}</strong>, Y: <strong>${t.Y}</strong>`)}
     <div class="kv">
-      <div class="k">DirectionsAccessible</div>
+      <div class="k">Directions Accessible</div>
       <div class="badges">${list(t.DirectionsAccessible ?? [])}</div>
     </div>
     <div class="kv">
       <div class="k">Endings</div>
       <div class="badges">${list(t.Endings ?? [])}</div>
     </div>
-    ${kv('AccessibleOnFoot', t.AccessibleOnFoot ? 'Yes' : 'No')}
-    ${kv('HasCollectible', t.HasCollectible ? 'Yes' : 'No')}
-    ${kv('RequiresItemToAccess', t.RequiresItemToAccess ? 'Yes' : 'No')}
-    ${kv('IsDoorToOtherMap', t.IsDoorToOtherMap ? 'Yes' : 'No')}
+    <div class="kv">
+      <div class="k">Attributes</div>
+      <div class="bool-list">
+        ${boolBadge('Accessible', t.AccessibleOnFoot)}
+        ${boolBadge('Has collectible', t.HasCollectible)}
+        ${boolBadge('Requires item to access', t.RequiresItemToAccess)}
+        ${boolBadge('Door to other map', t.IsDoorToOtherMap)}
+      </div>
+    </div>
     <div class="kv">
       <div class="k">Options</div>
       <div class="badges">${list(t.Options ?? [])}</div>
     </div>
-    ${kv('DisplayedText', escapeHTML(t.DisplayedText ?? '').replaceAll('|', '<br>'))}
+    ${kv('Displayed text', escapeHTML(t.DisplayedText ?? '').replaceAll('|', '<br>'))}
   `;
 }
 

@@ -140,3 +140,46 @@ header h1 { font-size: 16px; margin: 0 8px 0 0; }
   font-size: 13px;
   margin-top: 8px;
 }
+
+.bool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.bool-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  width: fit-content;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-weight: 500;
+}
+
+.bool-item .icon {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.bool-item.true {
+  border: 1px solid #10b981;
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.bool-item.true .icon {
+  color: #059669;
+}
+
+.bool-item.false {
+  border: 1px solid #f87171;
+  background-color: #fee2e2;
+  color: #7f1d1d;
+}
+.bool-item.false .icon {
+  color: #ef4444;
+}

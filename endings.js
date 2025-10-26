@@ -15,6 +15,14 @@
 
 var endings = [
 	{
+		EndNum: 9,
+		Name: "AC Bees",
+		Description: "Inside the tarp covered house, getting the keys from the dryer and then getting in the car makes everything go wrong, eventually getting killed by bees and the garage door.",
+		LastWords: "Bees erupt from the air conditioning unit and slowly begin to fill the car as I struggle to escape. They swarm me, crawling under my clothes and invading my nose and eyes. Then the garage door crushes down through the car into my legs.",
+		Location_Map: "Overworld",
+		Locations: [{X:-20, Y:24}]
+	},
+	{
 		EndNum: 23,
 		Name: "Antique Diver Grabber",
 		Description: "",
@@ -29,6 +37,14 @@ var endings = [
 		LastWords: "Something chomps down. I open my eyes and reel back. My arm is gone. I collapse in shock.",
 		Location_Map: "Overworld",
 		Locations: [{X:2, Y:0}]
+	},
+	{
+		EndNum: 60,
+		Name: "Massive Scorpion",
+		Description: "Opening the fridge in the kitchen of the tarp covered house gets you impaled by a scorpion.",
+		LastWords: "I swing the fridge door open and look. It's a massive scorpion. In a split second, it bursts out of the fridge and spears me through the neck with its tail.",
+		Location_Map: "Overworld",
+		Locations: [{X:-20, Y:24}]
 	},
 	{
 		EndNum: 85,
