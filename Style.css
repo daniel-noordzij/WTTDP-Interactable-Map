@@ -79,6 +79,7 @@ header h1 { font-size: 16px; margin: 0 8px 0 0; }
   position: absolute;
   inset: 0;
   transform-origin: 0 0; /* top-left origin for math simplicity */
+  will-change: transform;
 }
 
 .tile {
@@ -95,9 +96,13 @@ header h1 { font-size: 16px; margin: 0 8px 0 0; }
   background: #f3f4f6;
   cursor: pointer;
   transition: box-shadow .15s ease, transform .05s ease;
+  left: 0; top: 0;
+  will-change: transform;
+  contain: content;
 }
 .tile:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.15); z-index: 2; }
 .tile.selected { outline: 2px solid var(--accent); background: #eef2ff; z-index: 3; }
+.tile.no-label .label { display: none; }
 .tile .label {
   display: flex;
   flex-direction: column;
