@@ -184,27 +184,31 @@ function selectTile(idx) {
 
 function renderDetailsHTML(t) {
   const kv = (k, v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
-  const list = (arr) => arr && arr.length ? arr.map(a => `<span class="badge">${escapeHTML(String(a))}</span>`).join('') : '<span class="badge">None</span>';
+  const list = (arr) =>
+    arr && arr.length
+      ? arr.map(a => `<span class="badge">${escapeHTML(String(a))}</span>`).join('')
+      : '<span class="badge">None</span>';
+
   return `
     ${kv('Name', escapeHTML(t.Name ?? ''))}
-    ${kv('DisplayedText', escapeHTML(t.DisplayedText ?? '').replaceAll('|', '<br>'))}
     ${kv('Coordinates', `X: <strong>${t.X}</strong>, Y: <strong>${t.Y}</strong>`)}
     <div class="kv">
       <div class="k">DirectionsAccessible</div>
       <div class="badges">${list(t.DirectionsAccessible ?? [])}</div>
     </div>
     <div class="kv">
-      <div class="k">Options</div>
-      <div class="badges">${list(t.Options ?? [])}</div>
-    </div>
-    <div class="kv">
       <div class="k">Endings</div>
       <div class="badges">${list(t.Endings ?? [])}</div>
     </div>
-    <div class="kv"><div class="k">AccessibleOnFoot</div><div class="v">${t.AccessibleOnFoot ? 'Yes' : 'No'}</div></div>
-    <div class="kv"><div class="k">HasCollectible</div><div class="v">${t.HasCollectible ? 'Yes' : 'No'}</div></div>
-    <div class="kv"><div class="k">RequiresItemToAccess</div><div class="v">${t.RequiresItemToAccess ? 'Yes' : 'No'}</div></div>
-    <div class="kv"><div class="k">IsDoorToOtherMap</div><div class="v">${t.IsDoorToOtherMap ? 'Yes' : 'No'}</div></div>
+    ${kv('AccessibleOnFoot', t.AccessibleOnFoot ? 'Yes' : 'No')}
+    ${kv('HasCollectible', t.HasCollectible ? 'Yes' : 'No')}
+    ${kv('RequiresItemToAccess', t.RequiresItemToAccess ? 'Yes' : 'No')}
+    ${kv('IsDoorToOtherMap', t.IsDoorToOtherMap ? 'Yes' : 'No')}
+    <div class="kv">
+      <div class="k">Options</div>
+      <div class="badges">${list(t.Options ?? [])}</div>
+    </div>
+    ${kv('DisplayedText', escapeHTML(t.DisplayedText ?? '').replaceAll('|', '<br>'))}
   `;
 }
 
