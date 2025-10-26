@@ -1,0 +1,3246 @@
+/*
+// The whole overworld map.
+//
+// +X is North, -X is South
+// +Y is East, -Y is West
+//
+
+	Template for new areas:
+
+	{
+		X: 0,
+		Y: 0,
+		Name: "",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false
+	},
+
+*/
+
+var tiles = [
+	{
+		X: 0,
+		Y: 0,
+		Name: "Welcome To The Dark Place!",
+		DisplayedText: "I Pick myself up. The canopy of leaves far above my head shroud the cloudy sky, so it's dim down at the forest floor. I've never been here before.|Nailed to a tree, there's a small note.|-----|I look above my head. Through the trees, I see a dark cloud moving quickly towards the northwest.|-----|This is where i fell from the sky. It's almost as if I haven't gone anywhere.|The note is still here.|-----|I hear a distant train whistle.|All I have is an empty handgun.|-----|\"FOR FRESH STRIKES: |Unfortunately, welcome to the Dark Place! We all go here.|Play by the Dark Place's 6 rules, or fates worse than death will find you in this nightmare.|#1: Three red blots mark liars.|#2: Food means depravity and death.|#3 Tellers of time are sped up by--\" this part of the note has been torn through.|#4: Holes in suspicious places may lead to the Undergoing.|#5: Don't listen to the wolf.|#6: The train is the only escape.\"",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["Read it", "Look up", "Read the note", "Read the rules again", "Keep reading", "Pick a direction"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#AD2525"
+	},
+	{
+		X: 1,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "To the north I see a tree with a hole in it.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -3,
+		Name: "Forest - Thorns",
+		DisplayedText: "There's a lot of thorny bushes here. I scrape my legs a few times as I trudge through.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -4,
+		Name: "Forest - Dirt",
+		DisplayedText: "The grass has died off here. The west leads downhill.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "I'm on a gentle hill leading down west.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -6,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -7,
+		Name: "Forest",
+		DisplayedText: "To the north I see a pleasant stream.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -8,
+		Name: "Forest - Small Stream",
+		DisplayedText: "This stream flows to the west, down from the north.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#4C97B0"
+	},
+	{
+		X: 1,
+		Y: -9,
+		Name: "Forest - Small Stream",
+		DisplayedText: "This stream flows to the south, down from the east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#4C97B0"
+	},
+	{
+		X: 1,
+		Y: -10,
+		Name: "Forest",
+		DisplayedText: "To the east and south I see a pleasant stream.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 1,
+		Y: -11,
+		Name: "Lake",
+		DisplayedText: "To the west is a murky lake. I see a dock at the north side.|To the south, a river flows into the lake from the east.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 1,
+		Y: -15,
+		Name: "Lake - End of Dock",
+		DisplayedText: "There is a bucket. I see something shiny inside.|-----|It's a key. I take the Lake Shed Key.",
+		DirectionsAccessible: ["North"],
+		Options: ["Take the thing"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: true,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#A1875E"
+	},
+	{
+		X: 2,
+		Y: 0,
+		Name: "Forest - Hole Tree",
+		DisplayedText: "One of the old trees here has a large hole that allows me to see straight through to the other side.|-----|I put my arm through the strange tree.|Nothing happens.|-----|Every now and then, I feel something blowing on my arm. It's warm...|-----|I pull my arm out, a little disturbed.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["Put my arm through the hole", "Close my eyes", "Keep my eyes shut", "Pull my arm out of the hole"],
+		Endings: [40],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 3,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "There's a chirping of birds.|To the south I see a tree with a hole in it.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -3,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -3,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -3,
+		Y: -15,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -15,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -2,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -15,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: -1,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -15,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 0,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 1,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 1,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 1,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 1,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 1,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 1,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 2,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 2,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 2,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 2,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 2,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 2,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 3,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 3,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 3,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 3,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 3,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 3,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "",
+		DirectionsAccessible: ["None"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: false,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1DCFA5"
+	},
+	{
+		X: 4,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "To the north I see a pleasant stream.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 5,
+		Y: 0,
+		Name: "Forest - Small Stream",
+		DisplayedText: "This stream flows west, down from the east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#4C97B0"
+	},
+	{
+		X: 6,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "To the south I see a pleasant stream.| To the east is a steep, rocky slope upward.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 7,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "To the southeast is a rocky cliffside.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 8,
+		Y: 0,
+		Name: "Chasm",
+		DisplayedText: "To the north is a great chasm stretching far to the west and east.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#2F4F4F"
+	},
+	{
+		X: -1,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "Small pine cones litter the ground.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "A crow flies from the east.|-----|To the east I see a big tree stump.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -3,
+		Name: "Forest",
+		DisplayedText: "There's splinters of wood in the grass.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -4,
+		Name: "Forest",
+		DisplayedText: "To the north I see a lamp post.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "I see a staircase to the south.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -6,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -7,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -8,
+		Name: "Forest - Boulder",
+		DisplayedText: "There's a small boulder. I see small carvings in one side.|-----|Most of it seems like random scratches. One part looks like it says  \"S5E9.\"",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["Look at the carvings"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -9,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -4,
+		Y: -10,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -5,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -6,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -7,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -8,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -9,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "It smells like tree sap.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -10,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -11,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -12,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -13,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -14,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -15,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -16,
+		Y: 0,
+		Name: "Road",
+		DisplayedText: "It's a narrow, asphalt road leading west. To the east the road ends abruptly.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#696969"
+	},
+	{
+		X: -17,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -18,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -19,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -20,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "There is a telephone pole and a poster stuck to it with a picture of a werewolf grinning and winking cutely. \"Attend the party. East of Dagger\"",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -21,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -22,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -23,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -23,
+		Y: -16,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "Around the narrow boardwalk is murky, green water. The boardwalk weaves around the tall, gnagly elms and blad cypresses of the swamp, stretching north and south.|I see bubbles to the west.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -23,
+		Y: -17,
+		Name: "Forest - Swamp",
+		DisplayedText: "My foot sinks into the ground. I try to pull it out but find both my legs entrenched. I'm rapidly sinking into the bog. I wonder what to do, as the water rises over my waist, then my chest, then my ears...",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: [89],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: -11,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk turns here, leading west and south.",
+		DirectionsAccessible: ["West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: -12,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk leads out of the mangrove swamp to the west.",
+		DirectionsAccessible: ["West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: -13,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "The boardwalk weaves around the tall, gangly elms and bald cypresses of the dry swamp, stretching west and east. To the east the boardwalk enters a flooded mangrove.|Over the boardwalk to the west, I see a sign.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: -14,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "The boardwalk stretches east and west.|There's a white sign hanging from the branch of a tree above the boardwalk. It reads, \"AVOID HUMPHREY'S LOG CABIN AT ALL COSTS\"",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: -15,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "Around the narrow boardwalk is murky, green water. The boardwalk weaves around the tall, gangly elms and bald cypresses of the swamp, stretching west and east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -24,
+		Y: -16,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "The boardwalk turns here, leading north and east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -25,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "To the east a giant rock juts out from the ground.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -25,
+		Y: -11,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk leads north and south over the murky water.",
+		DirectionsAccessible: ["North", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -26,
+		Y: 0,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -26,
+		Y: -11,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk leads north and south over the murky water.",
+		DirectionsAccessible: ["North", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: 0,
+		Name: "Gate",
+		DisplayedText: "To the south there is a tall, sparkling, gold gate and a big monument sign:|\"Millington Grove.\"|The gate is half-open, leading to a road of red bricks.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["Go through the gate"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#DAA520"
+	},
+	{
+		X: -27,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "There is a black, barred fence to the south. Behind it are tall hedges.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "There is a black, barred fence to the south. Behind it are tall hedges.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -3,
+		Name: "Forest",
+		DisplayedText: "There is a black, barred fence to the south. Behind it are tall hedges.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -4,
+		Name: "Forest",
+		DisplayedText: "There is a black, barred fence to the south. Behind it are tall hedges.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "A fat tree stump resides here at the top of a hill. I can stand on it and get a view over a black, barred fence to the southeast: a white mansion domineers over its own private acre.|To the west I see the start of a boardwalk.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -6,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "A wooden boardwalk begins here and leads to the west, surrounded by a line of ornamental cypress trees like dark green, leafy poles.|I see a big stump to the east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -7,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "Here the boardwalk enters a dry swamp from the east, winding left and right around the tall, gangly elms and bald cypresses.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -8,
+		Name: "Forest - Boardwalk",
+		DisplayedText: "The boardwalk weaves around the tall, gangly elms and bald cypresses of the dry swamp, stretching west and east.|The boardwalk enters a flooded mangrove swamp to the west.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -9,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk enters a flodded area of the swamp filled with stringy mangroves. They all stand up on stilts of tangled roots over the deep water. The boardwalk leads west.",
+		DirectionsAccessible: ["West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -10,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk leads west and east over the deep water.",
+		DirectionsAccessible: ["West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -27,
+		Y: -11,
+		Name: "Forest - Mangrove Swamp",
+		DisplayedText: "The boardwalk turns here, leading north and east.",
+		DirectionsAccessible: ["North", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -28,
+		Y: 0,
+		Name: "Rich Estate",
+		DisplayedText: "I am standing just within a sparkling, gold gate. South, a red, brick path leads up the hill, and around me are tall, trimmed hedges with big, red flowers in them.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -29,
+		Y: 0,
+		Name: "Rich Estate",
+		DisplayedText: "Here is a fountain at the top of the hill, encircled by the red brick road which splits off in all directions. To the south I can see a great, white mansion with roofs upon balconies upon roofs.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -30,
+		Y: 0,
+		Name: "Rich Estate",
+		DisplayedText: "The hill takes me steeply down south under the mansion's shadow, under a wooden arch embued with ivy and golden flowers. The red, brick road runs downhill further and to the right, where under a wide awning, I see tall, lustrous windows, framed with a crimson, diamond pattern of stained glass.|-----|I walk up the brick road at the front of the mansion. North at the top of the hill, I see a fountain.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["Go to the front door."],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		// MORE TO DO? <----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####
+		// MORE TO DO? <----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####
+		// MORE TO DO? <----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####
+		// MORE TO DO? <----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####----####
+		X: -31,
+		Y: 0,
+		Name: "Rich Estate - Front Door",
+		DisplayedText: "The door has a shiny, brass knocker in the center, but there's also a doorbell. The porch area is shaded and fenced, surrounded by lush greenery.|-----|I use the knocker. Nothing happens.|-----|A lady opens the door suddenly. Her skin is pale, and her face is mostly coered by a scarf. \"Are you here for a tour? You'll have to make an appointment.\"|-----|\"This house is for sale.\" She coughs into the arm of her long-sleeved sweater.|-----|\"The owner is liquidating.\"|-----|\"They'd like to remain anonymous.\"|-----|\"Six hundred. Thousand.\"|-----|\"Let me know if you're interested.\" She closes the door.|-----|I hear some shifting in the house.|-----|It's locked.|-----|I see a beautiful lobby with chocolate-colored, checker tiles and two white, curved, marble staircases.|-----|I press in the round, yellow doorbell. Nothing happens.|-----|",
+		DirectionsAccessible: [],
+		Options: ["Knock", "Use the doorbell","Listen", "Open the door", "Look through the window", "\"What tour?\"", "\"Why is it for sale?\"", "\"Who owns it?\"", "\"How Much?\"", "\"That's dirt cheap.\"", "\"That's too expensive\""],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -30,
+		Y: -1,
+		Name: "Rich Estate - Hedges",
+		DisplayedText: "I am walking aroud tall hedges. To the east is a red, brick road leading down the hill.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -30,
+		Y: -2,
+		Name: "Rich Estate - Hedges",
+		DisplayedText: "I am walking aroud tall hedges.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -30,
+		Y: -3,
+		Name: "Rich Estate",
+		DisplayedText: "I am on a red, brick road lined with mighty oaks, extending south and north. To the east I see the side of a great, white mansion which rests in a deep, swirling greenery.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -31,
+		Y: -3,
+		Name: "Rich Estate",
+		DisplayedText: "I am on a red, brick road lined with mighty oaks, extending south and north. To the east is side of a great, white mansion which rests in a deep, swirling greenery.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -32,
+		Y: -3,
+		Name: "Rich Estate",
+		DisplayedText: "I am on a red, brick road lined with mighty oaks, extending south and north. To the east is side of a great, white mansion.|A train track runs from the west to the east, running straight under the wall of the mansion.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -33,
+		Y: -3,
+		Name: "Rich Estate",
+		DisplayedText: "I am on a red, brick road lined with mighty oaks, extending south and north. To the east is side of a great, white mansion.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: -34,
+		Y: -3,
+		Name: "Rich Estate - Hedges",
+		DisplayedText: "I am walking around tall hedges. I am at the back, southwest corner of the mansion. Past the fence I can see an empty highway.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#B22222"
+	},
+	{
+		X: 0,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -3,
+		Name: "Forest - Thorns",
+		DisplayedText: "There's Thorny red bushes here. Ouch.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -4,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -6,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -7,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -8,
+		Name: "Forest",
+		DisplayedText: "To the north and west I see a pleasant stream.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 0,
+		Y: -9,
+		Name: "Forest - Small Stream",
+		DisplayedText: "This stream flows to the west, down from the north.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#4C97B0"
+	},
+	{
+		X: 0,
+		Y: -10,
+		Name: "Forest - Small Stream",
+		DisplayedText: "This stream flows to the west, down from the east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#4C97B0"
+	},
+	{
+		X: 0,
+		Y: -11,
+		Name: "Forest - Mouth of Stream",
+		DisplayedText: "To the west is a lake. I see a dock at the north side.|Here, a small stream flows into the lake from the east.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#4C97B0"
+	},
+	{
+		X: 2,
+		Y: -11,
+		Name: "Lake",
+		DisplayedText: "To the west is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 3,
+		Y: -11,
+		Name: "Lake",
+		DisplayedText: "To the west is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 4,
+		Y: -11,
+		Name: "Forest",
+		DisplayedText: "To the southwest is a murky lake. I see a dock to the west.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 4,
+		Y: -12,
+		Name: "Forest",
+		DisplayedText: "To the south is a murky lake. I see a dock on this side of it, to the west.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: 4,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "To the south is a murky lake. I see a dock on this side of it, to the west.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 4,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "To the south is a murky lake. I see a dock on this side of it, to the west.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 4,
+		Y: -15,
+		Name: "Lake - Dock",
+		DisplayedText: "To the south is a rickety, wooden dock running out into the center of the murky lake.|There's a tin bucket at the end of the dock.|To the west is a small, wooden shed.|-----|I leave the dock. The diving suit... is still standing there.|To the west is a small, wooden shed.|-----|To the south is a rickety, wooden dock running out into the center of the murky lake. An empty diving suit stand at the end of the dock.|To the west is a small, wooden shed.|-----|To the south is a rickety, wooden dock running out into the center of the murky lake.|There is nothing standing on the dock.|To the west is a small, wooden shed.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 3,
+		Y: -15,
+		Name: "Lake - Dock",
+		DisplayedText: "I hear something emerging from the water. I look back. It's a decrepit, antique diving suit, covered in barnacles and rust. It climbs onto the dock and faces towards me, standing to the south. I don't see anyone inside.|-----|The rusty diving suit takes two steps down the dock closer to me. It's making weird noises!|-----|I back away. The diving suit doesn't come any closer.|-----|The empty, rusty diving suit is still standing at the end of the dock, like a statue. I don't want to mess with it.",
+		DirectionsAccessible: ["North", "South"],
+		Options: ["\"Stay back.\"", "\"What are you?\"", "\"What do you want?\"", "Back away slowly", "Pull out my empty pocket pistol", "Stare at it", "Leave"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#A1875E"
+	},
+	{
+		X: 2,
+		Y: -15,
+		Name: "Lake - Dock",
+		DisplayedText: "I hear bubbles in the water to the west.|-----|I hear something under the water.|-----|A cold, black glove grabs me and pulls me into the murky water. I struggle, but my chest goes ice cold as I inhale.",
+		DirectionsAccessible: ["North", "South"],
+		Options: ["Examine the bubbles", "Touch the bubbles", "Stay away from the bubbles"],
+		Endings: [23],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#A1875E"
+	},
+	{
+		X: 4,
+		Y: -16,
+		Name: "Lake - Shed",
+		DisplayedText: "It's a wooden shed. There's a door here.|To the south is a murky lake.|-----|I use my key. The door unlocks.|-----|I push open the door. There's a gigantic machine and cords running all over the floor-- and a man. His back is turned towards me. He notices the light and covers his face. \"Ah, no, please! Just give me more time!\"|-----|\"The... the device. What, you aren't here to wreck me? Please, close the door, and lock it!\"|-----|I close the door behind me and lock it. The two of us are alone in the shed. The man goes back to fumbling with the big machine.|-----|It looks like a giant, black fridge covered in knobs and dials, with big pipes and wheels likea steam engine. There's also an open panel with cords dangling out. It looms over him.|-----|He's opened up a panel in the side of the machine and is messing with switches. He's tugging on some kind of conveyer chain.|-----|He seems startled by my words, as if he'd already forgotten I exist. \"The machine is dying,\" he says.|-----|\"It keeps me alive, that's what it does!\"|-----|He turns around ad looks past me,  to the door. \"They'll come take me. They can't find out it's useless, or they'll take me.\"|-----|\"Everyone!\"|-----|\"They'll take me deep into Dimlose.\"|-----|\"You must be new here. Dimlose Forest. The lost forest. The place where the trees align! Endless wandering, endless wandering!\"|-----|\"They say they want to help me. They just want to make me useful,\" he says. \"But I know I'll end up in Dimlose.\"|-----|\"Can you stay here?\" he says. \"Just for a little while longer?\"|Then there's a pounding at the door, and the man whimpers.|-----|I hold the door as best I can. It sounds like there are multiple people outside.|-----|He turns back to the machine, as if to return to work, but his hands are down by his sides.|-----|As the door keeps rattling, he finally slieds down to the floor. \"It's hopeless. Endless wandering. Endless wandering!\"|-----|The door busts open, sending me across the room. I land on the floor.|-----|A dark, cold mist floods in through the door. filling the shed and making me shiver.|Then, just as quickly, the mist fades away. The man is gone. There's no one else here. It's quiet.|-----|A fire bursts out of the machine and streaks out through the door like a firework. Bright embers glide down to the floor where it was.|-----|I step out of the shed. A blinding light reflects off the lake, and something soars above it. I hear a call like a hawk. It leaves a trail of embers that fizzle out on the water. Then it zooms between the trees on the south side, leaving behind a path of fire which remains.|-----|The door has been busted off its hinges. South, across the lake I see a burnt path leading somewhere through the treeline.|-----|The shed is empty. The machine is gone.|-----|South, across the lake I see a burnt path leading somewhere through the treeline.|-----|To the south is a murky lake.|I see a dock to the east.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["Open the door", "Listen", "Knock", "\"What are you talking about?\"", "\"Who are you?\"", "Shut the door and lock it", "Look at the machine", "Watch him", "\"What are you doing?\"", "\"What is your name?\"", "\"What does the machine do?\"", "\"Why?\"", "\"Who are they?\"", "\"Where will they take you?\"", "\"What is Dimlose?\"", "\"Why would they do that?\"", "\"Why would they take you to Dimlose?\"", "\"Where is Dimlose?\"", "\"Please tell me what Dimlose is.\"", "Say nothing", "\"I can help.\"", "Hold the door", "Hide in the back of the shed", "Watch him", "...", "\"No, it's not.\"", "\"I'll come find you.\"", "Look", "Close my eyes", "Look at the machine", "Go outside", "Go inside"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#A1875E"
+	},
+	{
+		X: 4,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "To the south is a murky lake. I see a dock to the east.|To the east I see a wooden shed.",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 4,
+		Y: -18,
+		Name: "Lake",
+		DisplayedText: "To the south is a murky lake. I see a dock to the east.|-----|Did I hear something?",
+		DirectionsAccessible: ["North", "West", "East"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 4,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the southeast is a murky lake. I see a dock on this side of it, to the east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 3,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the east is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 2,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the east is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 1,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the east is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: 0,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the east is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -1,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the east is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -2,
+		Y: -19,
+		Name: "Lake",
+		DisplayedText: "To the east is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -3,
+		Y: -19,
+		Name: "Forest",
+		DisplayedText: "To the northeast is a murky lake.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -3,
+		Y: -18,
+		Name: "Lake - Shore",
+		DisplayedText: "There is water to the north. I see a dock across the lake at the north side.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -3,
+		Y: -17,
+		Name: "Lake",
+		DisplayedText: "To the north is a murky lake. I see a dock at the other side.|The grass is scorched in a path leading from the water's edge to the southeast.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -3,
+		Y: -16,
+		Name: "Lake - Shore",
+		DisplayedText: "There is water to the east and north. I see a dock across the lake at the north side.|From here I can see the tip of a ship's wooden mast poking up out of the water.",
+		DirectionsAccessible: ["West", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -4,
+		Y: -16,
+		Name: "Lake",
+		DisplayedText: "To the north is a murky lake. I see a dock at the other side.|The grass is scorched in a path leading to the east.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -4,
+		Y: -15,
+		Name: "Lake",
+		DisplayedText: "To the north is a murky lake. I see a dock at the opposite side.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -4,
+		Y: -14,
+		Name: "Lake",
+		DisplayedText: "To the north is a murky lake. I see a dock at the opposite side.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -4,
+		Y: -13,
+		Name: "Lake",
+		DisplayedText: "To the north is a murky lake. I see a dock at the other side.|The grass is scorched in a path leading to the southeast.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -4,
+		Y: -12,
+		Name: "Lake",
+		DisplayedText: "To the north is a murky lake. I see a dock at the opposite side.",
+		DirectionsAccessible: ["West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -4,
+		Y: -11,
+		Name: "Forest",
+		DisplayedText: "To the northwest I see a murky lake.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -11,
+		Name: "Lake",
+		DisplayedText: "To the west is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -2,
+		Y: -11,
+		Name: "Lake",
+		DisplayedText: "To the west is a murky lake. I see a dock at the north side.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -1,
+		Y: -11,
+		Name: "Lake",
+		DisplayedText: "To the west is a murky lake. I see a dock at the north side.|To the north, a river flows into the lake from the east.",
+		DirectionsAccessible: ["North", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B5C"
+	},
+	{
+		X: -1,
+		Y: -10,
+		Name: "Forest",
+		DisplayedText: "To the north I see a pleasant stream.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -9,
+		Name: "Forest",
+		DisplayedText: "To the north I see a pleasant stream.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -8,
+		Name: "Forest - Clearing",
+		DisplayedText: "This is a small clearing in the trees where the ground is bare and rocky.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -7,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -6,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -4,
+		Name: "Forest",
+		DisplayedText: "I feel a gentle breeze through the trees here.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -3,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -1,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -3,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -4,
+		Name: "Forest",
+		DisplayedText: "To the south I see a lamp post.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -6,
+		Name: "Forest",
+		DisplayedText: "Some rocks are stacked ontop of eachother here in little towers.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -7,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -8,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		// BOUNCING AROUND BABY?
+		X: -2,
+		Y: -9,
+		Name: "Forest",
+		DisplayedText: "Is something there?",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -2,
+		Y: -10,
+		Name: "Forest",
+		DisplayedText: "There's mounds of dirt around here.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -10,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -9,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -8,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -7,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -6,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -5,
+		Name: "Forest",
+		DisplayedText: "To the east I see a lamp post.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -4,
+		Name: "Forest - Lamp Post",
+		DisplayedText: "There is a lamp post here in the middle of the woods.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#1D691D"
+	},
+	{
+		X: -3,
+		Y: -3,
+		Name: "Forest",
+		DisplayedText: "To the west I see a lamp post.",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -2,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+	{
+		X: -3,
+		Y: -1,
+		Name: "Forest",
+		DisplayedText: "",
+		DirectionsAccessible: ["North", "West", "East", "South"],
+		Options: ["None"],
+		Endings: ["None"],
+		AccessibleOnFoot: true,
+		HasCollectible: false,
+		RequiresItemToAccess: false,
+		IsDoorToOtherMap: false,
+		tileBackgroundColor: "#228B22"
+	},
+];
+
+// =====================
+// Core config
+// =====================
+const TILE = 100; // px
+const MIN_SCALE = 0.25;
+const MAX_SCALE = 4;
+
+// You can set the viewport size via CSS variables at runtime if desired
+const viewport = document.getElementById('viewport');
+const world = document.getElementById('world');
+const panel = document.getElementById('panel');
+const detailsEl = document.getElementById('details');
+
+const zoomInBtn = document.getElementById('zoomIn');
+const zoomOutBtn = document.getElementById('zoomOut');
+const resetBtn = document.getElementById('resetView');
+
+// World transform state
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+
+let isPanning = false;
+let startPan = { x: 0, y: 0 };
+let startTranslate = { x: 0, y: 0 };
+
+let currentTiles = [];
+
+function applyTransform() {
+  world.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+}
+
+function worldToLocal(clientX, clientY) {
+  // Convert screen coords to world-local coords (pre-transform)
+  const rect = viewport.getBoundingClientRect();
+  const x = (clientX - rect.left - translateX) / scale;
+  const y = (clientY - rect.top - translateY) / scale;
+  return { x, y };
+}
+
+function setScaleAt(newScale, clientX, clientY) {
+  newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+  const before = worldToLocal(clientX, clientY);
+  const s0 = scale;
+  scale = newScale;
+  const after = worldToLocal(clientX, clientY);
+  // adjust translate so the point under the cursor stays in place
+  translateX += (after.x - before.x) * scale;
+  translateY += (after.y - before.y) * scale;
+  applyTransform();
+}
+
+function zoomBy(factor, clientX, clientY) {
+  setScaleAt(scale * factor, clientX, clientY);
+}
+
+function resetView() {
+  // Center the content roughly around occupied tiles if available
+  const bounds = computeBounds(tiles);
+  scale = 1;
+  translateX = translateY = 0;
+  applyTransform();
+  if (bounds) {
+    // Fit bounds into viewport with some padding
+    fitToBounds(bounds, 24);
+  }
+}
+
+function computeBounds(items) {
+  if (!items || !items.length) return null;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const t of items) {
+    const left = t.Y * TILE;
+    const top  = -t.X * TILE;
+    minX = Math.min(minX, left);
+    minY = Math.min(minY, top);
+    maxX = Math.max(maxX, left + TILE);
+    maxY = Math.max(maxY, top + TILE);
+  }
+  return { minX, minY, maxX, maxY };
+}
+
+function fitToBounds(b, padding = 0) {
+  const vp = viewport.getBoundingClientRect();
+  const w = b.maxX - b.minX + padding * 2;
+  const h = b.maxY - b.minY + padding * 2;
+  const sx = vp.width / w;
+  const sy = vp.height / h;
+  const target = Math.min(sx, sy, MAX_SCALE);
+  scale = Math.max(MIN_SCALE, target);
+  translateX = (vp.width - (b.maxX - b.minX) * scale) / 2 - b.minX * scale;
+  translateY = (vp.height - (b.maxY - b.minY) * scale) / 2 - b.minY * scale;
+  applyTransform();
+}
+
+function fillMissingTiles(data) {
+  if (!data.length) return data;
+  const map = new Map(data.map(t => [`${t.X},${t.Y}`, t]));
+  const xs = data.map(t => t.X);
+  const ys = data.map(t => t.Y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+
+  const filled = [];
+  for (let x = minX; x <= maxX; x++) {
+    for (let y = minY; y <= maxY; y++) {
+      const key = `${x},${y}`;
+      if (map.has(key)) {
+        filled.push(map.get(key));
+      } else {
+        filled.push({
+          X: x, Y: y,
+          Name: `${x},${y}`,
+          DisplayedText: '',
+          DirectionsAccessible: [],
+          Options: [],
+          Endings: [],
+          AccessibleOnFoot: false,
+          HasCollectible: false,
+          RequiresItemToAccess: false,
+          IsDoorToOtherMap: false,
+          tileBackgroundColor: '#ffffff33',
+          isPlaceholder: true
+        });
+      }
+    }
+  }
+  return filled;
+}
+
+// =====================
+// Render tiles
+// =====================
+function renderTiles(data) {
+  currentTiles = data;
+  world.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  data.forEach((t, idx) => {
+    const el = document.createElement('div');
+    el.className = 'tile';
+    el.style.left = `${t.Y * TILE}px`;
+    el.style.top  = `${-t.X * TILE}px`;
+    el.style.backgroundColor = t.tileBackgroundColor || '#f3f4f6';
+
+    if (!t.isPlaceholder && t.Name?.includes('-')) {
+      const [before, after] = t.Name.split('-', 2);
+      el.innerHTML = `
+        <div class="label two-line">
+          <strong>${escapeHTML(before.trim())}</strong>
+          <span>${escapeHTML(after.trim())}</span>
+        </div>`;
+    } else {
+      el.innerHTML = `
+        <div class="label">
+          <strong>${escapeHTML(t.Name || `${t.X},${t.Y}`)}</strong>
+        </div>`;
+    }
+
+    el.dataset.index = idx;
+    el.title = `${t.Name ?? 'Tile'} @ (${t.X}, ${t.Y})`;
+    el.addEventListener('click', () => selectTile(idx));
+
+    if (t.isPlaceholder) {
+      el.style.opacity = 0.6;
+      el.style.fontStyle = 'italic';
+    }
+
+    frag.appendChild(el);
+  });
+  world.appendChild(frag);
+}
+
+let selectedIndex = null;
+function selectTile(idx) {
+  selectedIndex = idx;
+  // highlight
+  document.querySelectorAll('.tile').forEach(el => el.classList.remove('selected'));
+  const el = document.querySelector(`.tile[data-index="${idx}"]`);
+  if (el) el.classList.add('selected');
+  // details
+  const t = currentTiles[idx];
+  detailsEl.innerHTML = renderDetailsHTML(t);
+}
+
+function renderDetailsHTML(t) {
+  const kv = (k, v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
+  const list = (arr) => arr && arr.length ? arr.map(a => `<span class="badge">${escapeHTML(String(a))}</span>`).join('') : '<span class="badge">None</span>';
+  return `
+    ${kv('Name', escapeHTML(t.Name ?? ''))}
+    ${kv('DisplayedText', escapeHTML(t.DisplayedText ?? '').replaceAll('|', '<br>'))}
+    ${kv('Coordinates', `X: <strong>${t.X}</strong>, Y: <strong>${t.Y}</strong>`)}
+    <div class="kv">
+      <div class="k">DirectionsAccessible</div>
+      <div class="badges">${list(t.DirectionsAccessible ?? [])}</div>
+    </div>
+    <div class="kv">
+      <div class="k">Options</div>
+      <div class="badges">${list(t.Options ?? [])}</div>
+    </div>
+    <div class="kv">
+      <div class="k">Endings</div>
+      <div class="badges">${list(t.Endings ?? [])}</div>
+    </div>
+    <div class="kv"><div class="k">AccessibleOnFoot</div><div class="v">${t.AccessibleOnFoot ? 'Yes' : 'No'}</div></div>
+    <div class="kv"><div class="k">HasCollectible</div><div class="v">${t.HasCollectible ? 'Yes' : 'No'}</div></div>
+    <div class="kv"><div class="k">RequiresItemToAccess</div><div class="v">${t.RequiresItemToAccess ? 'Yes' : 'No'}</div></div>
+    <div class="kv"><div class="k">IsDoorToOtherMap</div><div class="v">${t.IsDoorToOtherMap ? 'Yes' : 'No'}</div></div>
+  `;
+}
+
+function escapeHTML(str = "") {
+  return String(str)
+    .replace(/[&<>\"']/g, (m) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[m]));
+}
+
+// =====================
+// Pan interactions (mouse & touch)
+// =====================
+viewport.addEventListener('mousedown', (e) => {
+  // Left button only, and ignore if a tile click started (we'll still allow drag on whitespace)
+  if (e.button !== 0) return;
+  isPanning = true;
+  startPan = { x: e.clientX, y: e.clientY };
+  startTranslate = { x: translateX, y: translateY };
+  viewport.style.cursor = 'grabbing';
+});
+window.addEventListener('mousemove', (e) => {
+  if (!isPanning) return;
+  const dx = e.clientX - startPan.x;
+  const dy = e.clientY - startPan.y;
+  translateX = startTranslate.x + dx;
+  translateY = startTranslate.y + dy;
+  applyTransform();
+});
+window.addEventListener('mouseup', () => {
+  if (isPanning) {
+    isPanning = false;
+    viewport.style.cursor = 'default';
+  }
+});
+
+// Touch support: one-finger pan; two-finger pinch-zoom
+let lastTouchDist = null;
+let lastTouchCenter = null;
+
+viewport.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    isPanning = true;
+    startPan = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    startTranslate = { x: translateX, y: translateY };
+  } else if (e.touches.length === 2) {
+    isPanning = false;
+    lastTouchDist = touchDistance(e.touches[0], e.touches[1]);
+    lastTouchCenter = touchCenter(e.touches[0], e.touches[1]);
+  }
+}, { passive: false });
+
+viewport.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 1 && isPanning) {
+    const dx = e.touches[0].clientX - startPan.x;
+    const dy = e.touches[0].clientY - startPan.y;
+    translateX = startTranslate.x + dx;
+    translateY = startTranslate.y + dy;
+    applyTransform();
+  } else if (e.touches.length === 2) {
+    e.preventDefault();
+    const dist = touchDistance(e.touches[0], e.touches[1]);
+    const center = touchCenter(e.touches[0], e.touches[1]);
+    const factor = dist / (lastTouchDist || dist);
+    setScaleAt(scale * factor, center.x, center.y);
+    lastTouchDist = dist;
+    lastTouchCenter = center;
+  }
+}, { passive: false });
+
+function touchDistance(a, b) {
+  const dx = a.clientX - b.clientX;
+  const dy = a.clientY - b.clientY;
+  return Math.hypot(dx, dy);
+}
+function touchCenter(a, b) {
+  return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
+}
+
+// Wheel zoom (Ctrl+wheel for high-precision, but we always zoom here)
+viewport.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const delta = Math.sign(e.deltaY);
+  const factor = delta > 0 ? 0.9 : 1.1;
+  zoomBy(factor, e.clientX, e.clientY);
+}, { passive: false });
+
+// Buttons
+zoomInBtn.addEventListener('click', () => {
+  const rect = viewport.getBoundingClientRect();
+  zoomBy(1.2, rect.left + rect.width / 2, rect.top + rect.height / 2);
+});
+zoomOutBtn.addEventListener('click', () => {
+  const rect = viewport.getBoundingClientRect();
+  zoomBy(1/1.2, rect.left + rect.width / 2, rect.top + rect.height / 2);
+});
+resetBtn.addEventListener('click', resetView);
+
+// =====================
+// Init
+// =====================
+const filledTiles = fillMissingTiles(tiles);
+renderTiles(filledTiles);
+resetView();
+
+// Expose minimal API for replacing data at runtime
+window.MapAPI = {
+  setTiles(newTiles) {
+    if (!Array.isArray(newTiles)) return;
+    const filled = fillMissingTiles(newTiles);
+    renderTiles(filled);
+    resetView();
+  },
+  selectByCoord(x, y) {
+    const idx = currentTiles.findIndex(t => t.X === x && t.Y === y);
+    if (idx !== -1) selectTile(idx);
+  }
+};
