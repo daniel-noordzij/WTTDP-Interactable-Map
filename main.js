@@ -3,7 +3,7 @@
 // Core config
 // =====================
 const TILE = 100; // px
-const MIN_SCALE = 0.5;
+const MIN_SCALE = 0.4;
 const MAX_SCALE = 4;
 
 const VIRT_BUFFER_TILES = 2;
@@ -80,15 +80,14 @@ function zoomBy(factor, clientX, clientY) {
 }
 
 function resetView() {
-  // Center the content roughly around occupied tiles if available
-  const bounds = computeBounds(tiles);
+  const vp = viewport.getBoundingClientRect();
   scale = 1;
-  translateX = translateY = 0;
+
+  // Center X=0, Y=0 tile in the middle of the screen
+  translateX = vp.width / 2 - TILE / 2;
+  translateY = vp.height / 2 - TILE / 2;
+
   applyTransform();
-  if (bounds) {
-    // Fit bounds into viewport with some padding
-    fitToBounds(bounds, 24);
-  }
 }
 
 function computeBounds(items) {
